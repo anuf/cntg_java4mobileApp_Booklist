@@ -73,10 +73,11 @@ public class BookListFragment extends ListFragment {
 	@Override
 	public boolean onContextItemSelected(MenuItem item) {
 		
-		// This is done to get the position of the item we are clicking
+		// --- This is done to get the position of the item we are clicking
 		AdapterContextMenuInfo menuInfo = (AdapterContextMenuInfo) item.getMenuInfo();
 		Adapter adapter = getListAdapter();
 		Book theBook = (Book) adapter.getItem(menuInfo.position);
+		// ---
 		
 		//item.setTitle(menuInfo.position + ":- " +item.getTitle().toString());
 		switch (item.getItemId()) {
