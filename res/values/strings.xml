@@ -3,5 +3,14 @@
     <string name="app_name">BookList</string>
     <string name="empty_list">EmptyList</string>
     <string name="summaryActivity">Book Summary</string>
-
+    <string name="menu_action_1">Menu Action 1</string>
+    <string name="menu_action_2">Menu Action 2</string>
+    <string name="menu_action_3">Menu Action 3</string>
+    <string name="menu_action_4">Menu Action 4</string>
+    <string name="menu_action_5">Menu Action 5</string>
+    <string name="menu_action_6">Menu Action 6</string>
+    <string name="context_menu_action_1">Context Menu Action 1</string>
+    <string name="context_menu_action_2">Context Menu Action 2</string>
+    <string name="context_menu_action_3">Context Menu Action 3</string>
+    <string name="context_menu_action_4">Context Menu Action 4</string>
 </resources>
