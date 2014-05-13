@@ -10,15 +10,15 @@ import android.widget.TextView;
 
 
 public class SummaryFragment extends Fragment {
-	private TextView resumen;
+	private TextView summary;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View rootView = inflater.inflate(
 				R.layout.fragment_summary, container, false);
-		resumen = (TextView) rootView.findViewById(R.id.tvResumen);
+		summary = (TextView) rootView.findViewById(R.id.tvSummary);
 		Intent myIntent = getActivity().getIntent();
-		resumen.setText(myIntent.getStringExtra("content"));
+		summary.setText(myIntent.getStringExtra(BookListFragment.SUMMARY));
 		return rootView;
 	}
 }

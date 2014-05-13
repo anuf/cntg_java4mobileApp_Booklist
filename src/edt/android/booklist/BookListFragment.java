@@ -15,6 +15,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 public class BookListFragment extends ListFragment {
+	public static final String SUMMARY = "summary";
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -33,7 +35,7 @@ public class BookListFragment extends ListFragment {
 		
 		Adapter adapter = getListAdapter();
 		Intent openIntent = new Intent(getActivity(),SummaryActivity.class);
-		openIntent.putExtra("content", ((Book) adapter.getItem(position)).getSummary());
+		openIntent.putExtra(SUMMARY, ((Book) adapter.getItem(position)).getSummary());
     	startActivity(openIntent); 
 		
 	}
