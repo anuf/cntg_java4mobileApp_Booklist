@@ -2,5 +2,6 @@
 
     <string name="app_name">BookList</string>
     <string name="empty_list">EmptyList</string>
+    <string name="summaryActivity">Book Summary</string>
 
 </resources>

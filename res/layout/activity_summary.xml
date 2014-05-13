@@ -3,8 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     
-    <fragment class="edt.android.booklist.BookListFragment"
-        android:id="@+id/fragmentBooklist"
+    <fragment class="edt.android.booklist.SummaryFragment"
+        android:id="@+id/fragmentResumen"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
     
