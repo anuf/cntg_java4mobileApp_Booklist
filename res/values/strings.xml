@@ -9,8 +9,8 @@
     <string name="menu_action_4">Menu Action 4</string>
     <string name="menu_action_5">Menu Action 5</string>
     <string name="menu_action_6">Menu Action 6</string>
-    <string name="context_menu_action_create">Context Menu Create</string>
-    <string name="context_menu_action_read">Context Menu Read</string>
-    <string name="context_menu_action_update">Context Menu Update</string>
-    <string name="context_menu_action_delete">Context Menu Delete</string>
+    <string name="context_menu_action_create">Create</string>
+    <string name="context_menu_action_read">Read</string>
+    <string name="context_menu_action_update">Update</string>
+    <string name="context_menu_action_delete">Delete</string>
 </resources>

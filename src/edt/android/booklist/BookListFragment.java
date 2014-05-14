@@ -81,17 +81,17 @@ public class BookListFragment extends ListFragment {
 		
 		//item.setTitle(menuInfo.position + ":- " +item.getTitle().toString());
 		switch (item.getItemId()) {
-		case R.id.context_action1:
-			Toast.makeText(getActivity(), item.getTitle() + " selected at "+ menuInfo.position +" position", Toast.LENGTH_LONG).show();
+		case R.id.context_create:
+			Toast.makeText(getActivity(), item.getTitle() + " selected at position "+ menuInfo.position, Toast.LENGTH_LONG).show();
 			break;
-		case R.id.context_action2:
-			Toast.makeText(getActivity(), item.getTitle() + " selected at "+ menuInfo.position +" position", Toast.LENGTH_LONG).show();
+		case R.id.context_read:
+			Toast.makeText(getActivity(), item.getTitle() + " selected at position "+ menuInfo.position, Toast.LENGTH_LONG).show();
 			break;
-		case R.id.context_action3:
-			Toast.makeText(getActivity(), item.getTitle() + " selected at "+ menuInfo.position +" position", Toast.LENGTH_LONG).show();
+		case R.id.context_update:
+			Toast.makeText(getActivity(), item.getTitle() + " selected at position "+ menuInfo.position, Toast.LENGTH_LONG).show();
 			break;
-		case R.id.context_action4:
-			Toast.makeText(getActivity(), item.getTitle() + " selected at "+ menuInfo.position +" position", Toast.LENGTH_LONG).show();
+		case R.id.context_delete:
+			Toast.makeText(getActivity(), item.getTitle() + " selected at position "+ menuInfo.position, Toast.LENGTH_LONG).show();
 			break;
 		default:
 			return super.onOptionsItemSelected(item);
