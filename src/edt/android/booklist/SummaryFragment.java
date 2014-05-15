@@ -24,8 +24,12 @@ public class SummaryFragment extends Fragment {
 			Intent myIntent = getActivity().getIntent();
 			summary.setText(myIntent.getStringExtra(BookListFragment.SUMMARY));
 			break;
-		case Configuration.ORIENTATION_LANDSCAPE:			
-			summary.setText(getArguments().get(BookListFragment.SUMMARY).toString());
+		case Configuration.ORIENTATION_LANDSCAPE:
+			if(getArguments()!=null){
+				summary.setText(getArguments().get(BookListFragment.SUMMARY).toString());
+			}else{
+				summary.setText("");
+			}
 			break;
 
 		default:
