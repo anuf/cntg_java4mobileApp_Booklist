@@ -4,15 +4,18 @@ import java.util.List;
 
 import edt.android.booklist.model.Book;
 import edt.android.booklist.model.DataAccessFactory;
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.app.ListFragment;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.Adapter;
@@ -23,44 +26,61 @@ import android.widget.Toast;
 
 public class BookListFragment extends ListFragment {
 	public static final String SUMMARY = "summary";
-	
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.fragment_booklist, container,
 				false);
 		//
-		List<Book> books = DataAccessFactory.getInstance(getActivity()).getBooks();
-		ArrayAdapter<Book> adapter = new ArrayAdapter<Book>(getActivity(), android.R.layout.simple_list_item_1, books);
+		List<Book> books = DataAccessFactory.getInstance(getActivity())
+				.getBooks();
+		ArrayAdapter<Book> adapter = new ArrayAdapter<Book>(getActivity(),
+				android.R.layout.simple_list_item_1, books);
 		setListAdapter(adapter);
-		
+
 		return rootView;
 	}
-	
+
 	@Override
-	public void onListItemClick(ListView l, View v, int position, long id) {	
-		
+	public void onListItemClick(ListView l, View v, int position, long id) {
 		Adapter adapter = getListAdapter();
-		Intent openIntent = new Intent(getActivity(),SummaryActivity.class);
-		openIntent.putExtra(SUMMARY, ((Book) adapter.getItem(position)).getSummary());
-    	startActivity(openIntent); 
-		
+		switch (getResources().getConfiguration().orientation) {
+		case Configuration.ORIENTATION_PORTRAIT:
+			
+			Intent openIntent = new Intent(getActivity(), SummaryActivity.class);
+			openIntent.putExtra(SUMMARY,
+					((Book) adapter.getItem(position)).getSummary());
+			startActivity(openIntent);
+			break;
+		case Configuration.ORIENTATION_LANDSCAPE:
+			FragmentManager fm = getFragmentManager();
+			FragmentTransaction ft = fm.beginTransaction();
+			Fragment myFragment = new SummaryFragment();
+			Bundle args = new Bundle();
+			args.putString(SUMMARY, ((Book) adapter.getItem(position)).getSummary());
+			myFragment.setArguments(args);
+			ft.replace(R.id.summaryContainer, myFragment).commit();
+			break;
+
+		default:
+			break;
+		}
+
 	}
-	
-	
-	
+
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		registerForContextMenu(getListView());
 	}
+
 	/*
-	@Override
-	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-		inflater.inflate(R.menu.layout_menu, menu);
-		
-	}
-	*/
+	 * @Override public void onCreateOptionsMenu(Menu menu, MenuInflater
+	 * inflater) { inflater.inflate(R.menu.layout_menu, menu);
+	 * 
+	 * }
+	 */
 	@Override
 	public void onCreateContextMenu(ContextMenu menu, View v,
 			ContextMenuInfo menuInfo) {
@@ -68,35 +88,47 @@ public class BookListFragment extends ListFragment {
 		MenuInflater mInflater = getActivity().getMenuInflater();
 		mInflater.inflate(R.menu.context_menu_layout, menu);
 	}
-	
-	
+
 	@Override
 	public boolean onContextItemSelected(MenuItem item) {
-		
+
 		// --- This is done to get the position of the item we are clicking
-		AdapterContextMenuInfo menuInfo = (AdapterContextMenuInfo) item.getMenuInfo();
+		AdapterContextMenuInfo menuInfo = (AdapterContextMenuInfo) item
+				.getMenuInfo();
 		Adapter adapter = getListAdapter();
 		Book theBook = (Book) adapter.getItem(menuInfo.position);
 		// ---
-		
-		//item.setTitle(menuInfo.position + ":- " +item.getTitle().toString());
+
+		// item.setTitle(menuInfo.position + ":- " +item.getTitle().toString());
 		switch (item.getItemId()) {
 		case R.id.context_create:
-			Toast.makeText(getActivity(), item.getTitle() + " selected at position "+ menuInfo.position, Toast.LENGTH_LONG).show();
+			Toast.makeText(
+					getActivity(),
+					item.getTitle() + " selected at position "
+							+ menuInfo.position, Toast.LENGTH_LONG).show();
 			break;
 		case R.id.context_read:
-			Toast.makeText(getActivity(), item.getTitle() + " selected at position "+ menuInfo.position, Toast.LENGTH_LONG).show();
+			Toast.makeText(
+					getActivity(),
+					item.getTitle() + " selected at position "
+							+ menuInfo.position, Toast.LENGTH_LONG).show();
 			break;
 		case R.id.context_update:
-			Toast.makeText(getActivity(), item.getTitle() + " selected at position "+ menuInfo.position, Toast.LENGTH_LONG).show();
+			Toast.makeText(
+					getActivity(),
+					item.getTitle() + " selected at position "
+							+ menuInfo.position, Toast.LENGTH_LONG).show();
 			break;
 		case R.id.context_delete:
-			Toast.makeText(getActivity(), item.getTitle() + " selected at position "+ menuInfo.position, Toast.LENGTH_LONG).show();
+			Toast.makeText(
+					getActivity(),
+					item.getTitle() + " selected at position "
+							+ menuInfo.position, Toast.LENGTH_LONG).show();
 			break;
 		default:
 			return super.onOptionsItemSelected(item);
 		}
 		return true;
 	}
-	
+
 }
