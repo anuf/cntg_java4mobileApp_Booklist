@@ -44,29 +44,7 @@ public class BookListFragment extends ListFragment {
 
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
-		Adapter adapter = getListAdapter();
-		switch (getResources().getConfiguration().orientation) {
-		case Configuration.ORIENTATION_PORTRAIT:
-			
-			Intent openIntent = new Intent(getActivity(), SummaryActivity.class);
-			openIntent.putExtra(SUMMARY,
-					((Book) adapter.getItem(position)).getSummary());
-			startActivity(openIntent);
-			break;
-		case Configuration.ORIENTATION_LANDSCAPE:
-			FragmentManager fm = getFragmentManager();
-			FragmentTransaction ft = fm.beginTransaction();
-			Fragment myFragment = new SummaryFragment();
-			Bundle args = new Bundle();
-			args.putString(SUMMARY, ((Book) adapter.getItem(position)).getSummary());
-			myFragment.setArguments(args);
-			ft.replace(R.id.summaryContainer, myFragment).commit();
-			break;
-
-		default:
-			break;
-		}
-
+		showSummary(position);
 	}
 
 	@Override
@@ -129,6 +107,34 @@ public class BookListFragment extends ListFragment {
 			return super.onOptionsItemSelected(item);
 		}
 		return true;
+	}
+	
+	
+	
+	public void showSummary(int position){
+		Adapter adapter = getListAdapter();
+		Book aBook = (Book) adapter.getItem(position);
+		
+		showSummary(aBook);
+	}
+	
+	public void showSummary(Book book){
+		((BookListActivity) getActivity()).selectedBook = book;
+		switch (getResources().getConfiguration().orientation) {
+		case Configuration.ORIENTATION_PORTRAIT:
+			
+			Intent openIntent = new Intent(getActivity(), SummaryActivity.class);
+			openIntent.putExtra(SUMMARY,book.getSummary());
+			startActivity(openIntent);
+			break;
+		case Configuration.ORIENTATION_LANDSCAPE:
+			Fragment myFragment = new SummaryFragment().newInstance(book);
+			getFragmentManager().beginTransaction().replace(R.id.summaryContainer, myFragment).commit();
+			break;
+
+		default:
+			break;
+		}
 	}
 
 }
